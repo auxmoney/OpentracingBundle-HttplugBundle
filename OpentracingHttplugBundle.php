@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle;
 
+use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginFactoryCompilerPass;
 use Auxmoney\OpentracingHttplugBundle\DependencyInjection\OpentracingHttplugExtension;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,10 +16,10 @@ final class OpentracingHttplugBundle extends Bundle
     {
         parent::build($container);
 
-//        $container->addCompilerPass(
-//            new AmqplibRabbitMqProducerCompilerPass(),
-//            PassConfig::TYPE_BEFORE_OPTIMIZATION,
-//            -999
-//        );
+        $container->addCompilerPass(
+            new HttplugPluginFactoryCompilerPass(),
+            PassConfig::TYPE_BEFORE_OPTIMIZATION,
+            -999
+        );
     }
 }
