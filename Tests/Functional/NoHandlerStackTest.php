@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Auxmoney\OpentracingGuzzleBundle\Tests\Functional;
+namespace Auxmoney\OpentracingHttplugBundle\Tests\Functional;
 
 use Auxmoney\OpentracingBundle\Tests\Functional\JaegerConsoleFunctionalTest;
 use Symfony\Component\Process\Process;
@@ -11,7 +11,7 @@ class NoHandlerStackTest extends JaegerConsoleFunctionalTest
 {
     public function testExceptionWithoutHandlerStack(): void
     {
-        $this->copyTestProjectFiles('existingHandler');
+        $this->copyTestProjectFiles('bundleLoaded');
 
         $this->composerDumpAutoload();
 

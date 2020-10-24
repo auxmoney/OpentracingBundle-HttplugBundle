@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle\Tests\Unit;
 
-use Auxmoney\OpentracingHttplugBundle\DependencyInjection\AmqplibRabbitMqConsumerCompilerPass;
-use Auxmoney\OpentracingHttplugBundle\DependencyInjection\AmqplibRabbitMqProducerCompilerPass;
+use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginClientFactoryCompilerPass;
 use Auxmoney\OpentracingHttplugBundle\OpentracingHttplugBundle;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,13 +24,7 @@ class OpentracingHttplugBundleTest extends TestCase
         $containerBuilder = $this->prophesize(ContainerBuilder::class);
 
         $containerBuilder->addCompilerPass(
-            new AmqplibRabbitMqProducerCompilerPass(),
-            'beforeOptimization',
-            -999
-        )->shouldBeCalled();
-
-        $containerBuilder->addCompilerPass(
-            new AmqplibRabbitMqConsumerCompilerPass(),
+            new HttplugPluginClientFactoryCompilerPass(),
             'beforeOptimization',
             -999
         )->shouldBeCalled();

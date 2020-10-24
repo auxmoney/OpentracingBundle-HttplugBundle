@@ -9,4 +9,3 @@ services:
     Auxmoney\OpentracingHttplugBundle\Factory\DecoratedPluginClientFactory:
         arguments:
             - '@Http\Client\Common\PluginClientFactory'
-
