@@ -20,7 +20,12 @@ composer require php-http/message
 composer require php-http/httplug-bundle
 composer require http-interop/http-factory-guzzle
 
-# composer require nyholm/psr7
-# composer require auxmoney/opentracing-bundle-jaeger opentracing/opentracing:1.0.0-beta5@beta
 composer require auxmoney/opentracing-bundle-php-http-httplug-bundle
+
+# composer require symfony/flex --no-update # adds flex, suppress composer.lock
+# composer install                          # create a lock file
+# composer update symfony/*                 # updates to SYMFONY_VERSION, but runs recipes
+# git reset --hard                          # reset tracked files
+# git clean -df                             # clean up recipe generated files and folders
+
 cd ../../
