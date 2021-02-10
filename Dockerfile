@@ -22,28 +22,6 @@ RUN /root/install_php.sh
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && curl https://get.symfony.com/cli/installer | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
-#RUN apt-get update \
-#    && apt-get install -y --no-install-recommends gnupg curl git \
-#    && echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main" > /etc/apt/sources.list.d/ondrej-php.list \
-#    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C \
-#    && apt-get update \
-#    && apt-get -y --no-install-recommends install \
-#        ca-certificates \
-#        unzip \
-#        php7.3-apcu \
-#        php7.3-apcu-bc \
-#        php7.3-cli \
-#        php7.3-curl \
-#        php7.3-json \
-#        php7.3-mbstring \
-#        php7.3-opcache \
-#        php7.3-readline \
-#        php7.3-xml \
-#        php7.3-zip \
-#        php7.3-phpdbg \
-#    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-#    && curl https://get.symfony.com/cli/installer | bash && mv /root/.symfony/bin/symfony /usr/local/bin/symfony
-
 # docker
 RUN apt-get install -y --no-install-recommends \
     apt-transport-https \
@@ -59,6 +37,5 @@ RUN apt-get install -y --no-install-recommends \
     && apt-get install -y --no-install-recommends docker-ce docker-ce-cli containerd.io
 
 RUN apt-get clean && composer clear-cache && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* ~/.composer
-#RUN apt-get -y --no-install-recommends install php7.3-phpdbg
 
 CMD ["php", "-a"]

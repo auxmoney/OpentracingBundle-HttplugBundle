@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 declare -a versions=("php7.2" "php7.3" "php7.4")
-declare -a extensions=("cli" "apcu-bc" "curl" "json" "mbstring" "opcache" "readline" "xml" "zip" "phpdbg")
 
 for version in "${versions[@]}"; do
     echo "Installing ${version} ..."
