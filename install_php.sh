@@ -5,11 +5,6 @@ declare -a extensions=("cli" "apcu-bc" "curl" "json" "mbstring" "opcache" "readl
 
 for version in "${versions[@]}"; do
     echo "Installing ${version} ..."
-    
-    # for extensions in "${extensions[@]}"; do
-
-    #     echo $val
-    # done
 
     apt-get -y --no-install-recommends install "${version}-apcu" \
         "${version}-apcu-bc" \

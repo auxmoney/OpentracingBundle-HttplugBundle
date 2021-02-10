@@ -22,11 +22,7 @@ class HttplugPluginClientFactoryCompilerPass implements CompilerPassInterface
             if ($definition->getClass() === PluginClient::class) {
                 $callable = $definition->getFactory();
 
-//                echo 'entering...' . PHP_EOL;
-
                 if ($callable[0] instanceof Reference && (string)$callable[0] === PluginClientFactory::class) {
-                    echo 'PluginClient factory decorated!' . PHP_EOL;
-
                     $definition->setFactory([new Reference(DecoratedPluginClientFactory::class), 'createClient']);
                 }
             }

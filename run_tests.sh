@@ -11,13 +11,17 @@ function run_test() {
         web bash -c "./switch_php.sh ${php_version}; figlet -f big.flf '$php_message';  figlet -f big.flf '$symfony_message'; composer update && composer run phpunit-functional"
 }
 
+if [[ $# -ne 2 ]] ; then
+    echo "$(basename "$0") PHP_VERSION[7.2|7.3|7.4] SYMFONY_VERSION[3.4|4.4|5.1]"
+    exit 1
+fi
 
 specific_php_version="$1"
 specific_symfony_version="$2"
 
 if [[ ! -z "$specific_php_version" && ! -z "$specific_symfony_version" ]]; then
     run_test "$specific_php_version" "$specific_symfony_version"
-    exit
+    exit $?
 fi
 
 declare -a php_versions=("7.2" "7.3" "7.4")
