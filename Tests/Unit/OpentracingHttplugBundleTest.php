@@ -22,7 +22,6 @@ class OpentracingHttplugBundleTest extends TestCase
     public function testBuild(): void
     {
         $containerBuilder = $this->prophesize(ContainerBuilder::class);
-
         $containerBuilder->addCompilerPass(
             new HttplugPluginClientFactoryCompilerPass(),
             'beforeOptimization',
