@@ -8,10 +8,12 @@ use Auxmoney\OpentracingBundle\Internal\Constant;
 use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 use Auxmoney\OpentracingBundle\Service\Tracing;
 use Http\Client\Common\Plugin;
+use Http\Client\Exception\HttpException;
 use Http\Client\Exception\TransferException;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 final class OpentracingPlugin implements Plugin
 {
@@ -32,17 +34,13 @@ final class OpentracingPlugin implements Plugin
     {
         $request = $this->tracing->injectTracingHeaders($request);
 
-//        var_dump('checking');
-//        var_dump($request);
-//        var_dump('headers...', $request->getHeaders());
-
         $this->requestSpanning->start($request->getMethod(), $request->getUri()->__toString());
         $this->tracing->setTagOfActiveSpan(Constant::SPAN_ORIGIN, 'httplug:request');
 
         return $next($request)->then(function (ResponseInterface $response) {
             $this->onFulfilled($response);
             return $response;
-        }, function (TransferException $exception) {
+        }, function (Throwable $exception) {
             $this->onRejected($exception);
             throw $exception;
         });
@@ -54,7 +52,7 @@ final class OpentracingPlugin implements Plugin
         $this->tracing->finishActiveSpan();
     }
 
-    private function onRejected(TransferException $exception): void
+    private function onRejected(Throwable $exception): void
     {
         $this->tracing->logInActiveSpan([
             'event' => 'error',
@@ -63,6 +61,10 @@ final class OpentracingPlugin implements Plugin
             'message' => $exception->getMessage(),
             'stack' => $exception->getTraceAsString(),
         ]);
+
+        if ($exception instanceof HttpException) {
+            $this->requestSpanning->finish($exception->getResponse()->getStatusCode());
+        }
 
         $this->tracing->finishActiveSpan();
     }
