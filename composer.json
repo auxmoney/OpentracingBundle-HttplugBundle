@@ -35,7 +35,8 @@
     "symfony/process": "*",
     "symfony/yaml": "*",
     "mtdowling/jmespath.php": "^2.5",
-    "nyholm/psr7": "^1.3"
+    "nyholm/psr7": "^1.3",
+    "php-http/curl-client": "^2.2"
   },
   "autoload": {
     "psr-4": {
@@ -58,6 +59,7 @@
     "phpcs": "vendor/bin/phpcs",
     "phpunit": "phpdbg -qrr vendor/bin/phpunit --colors=never --testsuite=unit",
     "phpunit-functional": [
+      "Tests/Functional/Scripts/clean.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/checkEnvironment.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/setup.sh",
       "Tests/Functional/Scripts/requireAdditionalVendors.sh",
