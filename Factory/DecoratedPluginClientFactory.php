@@ -9,7 +9,7 @@ use Http\Client\Common\Plugin;
 use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
 use Http\Client\HttpAsyncClient;
-use Http\HttplugBundle\Collector\PluginClientFactory as ProfilingPluginClientFactory;
+use Http\HttplugBundle\Collector\PluginClientFactory as DevPluginClientFactory;
 use Psr\Http\Client\ClientInterface;
 
 class DecoratedPluginClientFactory
@@ -18,8 +18,9 @@ class DecoratedPluginClientFactory
     private $plugin;
 
     /**
-     * PluginClientFactory is used in Symfony prod, ProfilingPluginClientFactory in Symfony dev.
-     * @param PluginClientFactory|ProfilingPluginClientFactory $pluginClientFactory
+     * DevPluginClientFactory = Symfony dev.
+     * PluginClientFactory = Symfony prod.
+     * @param DevPluginClientFactory|PluginClientFactory $pluginClientFactory
      * @param OpentracingPlugin $plugin
      */
     public function __construct($pluginClientFactory, OpentracingPlugin $plugin)
@@ -37,8 +38,6 @@ class DecoratedPluginClientFactory
     public function createClient($client, array $plugins = [], array $options = []): PluginClient
     {
         $plugins[] = $this->plugin;
-
-//        echo 'decoratiooon...' . PHP_EOL;
 
         return $this->pluginClientFactory->createClient($client, $plugins, $options);
     }

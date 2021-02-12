@@ -21,8 +21,6 @@
     "php-http/client-common": "^2.3",
     "auxmoney/opentracing-bundle-core": "^v0.7.2",
     "php-http/httplug-bundle": "^1.19",
-    "php-http/curl-client": "^2.2",
-    "guzzlehttp/psr7": "^1.7",
     "php-http/message": "^1.10",
     "http-interop/http-factory-guzzle": "^1.0"
   },
@@ -60,22 +58,12 @@
     "phpcs": "vendor/bin/phpcs",
     "phpunit": "phpdbg -qrr vendor/bin/phpunit --colors=never --testsuite=unit",
     "phpunit-functional": [
-      "Tests/Functional/Scripts/cleanup.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/checkEnvironment.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/setup.sh",
       "Tests/Functional/Scripts/requireAdditionalVendors.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/createResetPoint.sh",
       "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage",
-      "Tests/Functional/Scripts/teardown.sh"
-    ],
-    "phpunit-functional-one": [
-      "Tests/Functional/Scripts/cleanup.sh",
-      "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/checkEnvironment.sh",
-      "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/setup.sh",
-      "Tests/Functional/Scripts/requireAdditionalVendors.sh",
-      "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/createResetPoint.sh",
-      "vendor/bin/phpunit --colors=never --testsuite=functional --no-coverage --",
-      "Tests/Functional/Scripts/teardown.sh"
+      "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/teardown.sh"
     ],
     "phpstan": "vendor/bin/phpstan analyse --no-progress"
   }
