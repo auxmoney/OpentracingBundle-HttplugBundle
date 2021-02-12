@@ -21,7 +21,7 @@ jobs:
         strategy:
             matrix:
                 include:
-                    - php: '7.1'
+                    - php: '7.2'
                       symfony: '3.4.*'
                     - php: '7.4'
                       symfony: '3.4.*'
