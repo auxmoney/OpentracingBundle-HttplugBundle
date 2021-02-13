@@ -4,3 +4,6 @@ composer.lock
 /build/
 /vendor/
 /.idea/
+/.devcontainer
+/.vscode
+/*.code-workspace
