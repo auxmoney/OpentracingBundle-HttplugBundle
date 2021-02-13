@@ -5,6 +5,6 @@
 #git config --global user.name "Your Name"
 
 # clean any previously created testproject
-rm -rf build/testproject
-docker stop jaeger || true
-docker rm jaeger || true
+#rm -rf build/testproject
+#docker stop jaeger || true
+#docker rm jaeger || true

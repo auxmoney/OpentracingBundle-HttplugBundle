@@ -18,8 +18,8 @@
   "require": {
     "php": "^7.2.0",
     "opentracing/opentracing": "1.0.0-beta5@beta",
-    "php-http/client-common": "^2.3",
     "auxmoney/opentracing-bundle-core": "^v0.7.2",
+    "php-http/client-common": "^2.3",
     "php-http/httplug-bundle": "^1.19",
     "php-http/message": "^1.10",
     "http-interop/http-factory-guzzle": "^1.0"
@@ -59,7 +59,6 @@
     "phpcs": "vendor/bin/phpcs",
     "phpunit": "phpdbg -qrr vendor/bin/phpunit --colors=never --testsuite=unit",
     "phpunit-functional": [
-      "Tests/Functional/Scripts/clean.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/checkEnvironment.sh",
       "vendor/auxmoney/opentracing-bundle-core/Tests/Functional/Scripts/setup.sh",
       "Tests/Functional/Scripts/requireAdditionalVendors.sh",
