@@ -20,7 +20,6 @@ class TestController extends AbstractController
 
     public function index(HttpClient $client)
     {
-//        $request = $psr17Factory->createRequest('GET', 'https://filis.free.beeceptor.com');
         $request = new Request('GET', 'https://github.com/auxmoney/OpentracingBundle-HttplugBundle');
 
         $contents = $this->client->sendRequest($request)->getBody()->getContents();

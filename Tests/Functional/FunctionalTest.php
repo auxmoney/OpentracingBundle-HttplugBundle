@@ -20,7 +20,6 @@ class FunctionalTest extends JaegerWebFunctionalTest
         $p->mustRun();
         $output = $p->getOutput();
         $traceId = substr($output, 0, strpos($output, ':'));
-
         self::assertNotEmpty($traceId);
 
         $spans = $this->getSpansFromTrace($this->getTraceFromJaegerAPI($traceId));
