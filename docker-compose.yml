@@ -1,21 +1,6 @@
 version: '3.3'
 
 services:
-#    jaeger:
-#        image: jaegertracing/all-in-one:1.18
-#        restart: always
-#        ports:
-#            - "5775:5775"
-#            - "6831:6831"
-#            - "6832:6832"
-#            - "5778:5778"
-#            - "16686:16686"
-#            - "14268:14268"
-#            - "14250:14250"
-#            - "9411:9411"
-#        environment:
-#            COLLECTOR_ZIPKIN_HTTP_PORT: 9411
-
     web:
         environment:
             BRANCH: master
@@ -23,29 +8,6 @@ services:
             PR_ORIGIN: whatever
         network_mode: host
         build: .
-        ports:
-            - "16686:16686"
-#        depends_on:
-#            - jaeger
         volumes:
             - .:/code
-#            - /home/filis/Escritorio/dev/OpentracingBundle-core:/code/vendor/auxmoney/opentracing-bundle-core
             - /var/run/docker.sock:/var/run/docker.sock
-#        links:
-#            - jaeger
-
-#    wordpress:
-#        depends_on:
-#            - jaeger
-#        image: wordpress:latest
-#        ports:
-#            - "8000:80"
-#        restart: always
-#        environment:
-#            WORDPRESS_DB_HOST: db:3306
-#            WORDPRESS_DB_USER: wordpress
-#            WORDPRESS_DB_PASSWORD: wordpress
-#            WORDPRESS_DB_NAME: wordpress
-
-volumes:
-    db_data: {}

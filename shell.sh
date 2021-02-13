@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 
-docker-compose run -e SYMFONY_VERSION=$symfony_version \
-        web bash -c "./switch_php.sh 7.4; composer update && composer run phpunit-functional"
-
+docker-compose run -e SYMFONY_VERSION=5.1 \
+web bash -c "composer update && composer run phpunit-functional"
