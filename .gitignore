@@ -7,3 +7,4 @@ composer.lock
 /.devcontainer
 /.vscode
 /*.code-workspace
+/init_env.sh
