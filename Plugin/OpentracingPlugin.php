@@ -9,7 +9,6 @@ use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 use Auxmoney\OpentracingBundle\Service\Tracing;
 use Http\Client\Common\Plugin;
 use Http\Client\Exception\HttpException;
-use Http\Client\Exception\TransferException;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;

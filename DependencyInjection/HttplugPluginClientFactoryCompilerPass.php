@@ -13,9 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class HttplugPluginClientFactoryCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @return void
-     */
     public function process(ContainerBuilder $container): void
     {
         foreach ($container->getDefinitions() as $definition) {
@@ -23,7 +20,10 @@ class HttplugPluginClientFactoryCompilerPass implements CompilerPassInterface
                 $callable = $definition->getFactory();
 
                 if ($callable[0] instanceof Reference && (string)$callable[0] === PluginClientFactory::class) {
-                    $definition->setFactory([new Reference(DecoratedPluginClientFactory::class), 'createClient']);
+                    $definition->setFactory([
+                        new Reference(DecoratedPluginClientFactory::class),
+                        'createClient'
+                    ]);
                 }
             }
         }

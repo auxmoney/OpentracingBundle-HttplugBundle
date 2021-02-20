@@ -4,22 +4,26 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle\Tests\Unit\Plugin;
 
-use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
-use Auxmoney\OpentracingBundle\Service\Tracing;
-use Auxmoney\OpentracingHttplugBundle\Plugin\OpentracingPlugin;
-use Http\Client\Exception\HttpException;
-use Http\Client\Exception\TransferException;
-use Http\Client\Promise\HttpFulfilledPromise;
-use Http\Client\Promise\HttpRejectedPromise;
 use Nyholm\Psr7\Request;
 use Nyholm\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Http\Client\Exception\HttpException;
+use Http\Client\Exception\TransferException;
+use Http\Client\Promise\HttpRejectedPromise;
+use Http\Client\Promise\HttpFulfilledPromise;
+use Auxmoney\OpentracingBundle\Service\Tracing;
+use Auxmoney\OpentracingHttplugBundle\Plugin\OpentracingPlugin;
+use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 
 class OpentracingPluginTest extends TestCase
 {
+    /** @var RequestSpanning|ObjectProphecy */
     private $requestSpanning;
+
+    /** @var Tracing|ObjectProphecy */
     private $tracing;
 
     public function setUp()
@@ -45,12 +49,13 @@ class OpentracingPluginTest extends TestCase
 
         $subject = new OpentracingPlugin($this->requestSpanning->reveal(), $this->tracing->reveal());
 
-        $next = function (RequestInterface $request) use($injectedRequest) {
+        $next = function (RequestInterface $request) use ($injectedRequest) {
             $this->assertSame($request, $injectedRequest);
             return new HttpFulfilledPromise(new Response(201, [], 'some body'));
         };
 
-        $promise = $subject->handleRequest($originalRequest, $next, static function() {});
+        $promise = $subject->handleRequest($originalRequest, $next, static function () {
+        });
 
         /** @var ResponseInterface $response */
         $response = $promise->wait();
@@ -59,7 +64,7 @@ class OpentracingPluginTest extends TestCase
         self::assertSame(201, $response->getStatusCode());
     }
 
-    public function test_when_promise_is_rejected_by_an_exception_it_logs_in_active_span(): void
+    public function test_when_promise_is_rejected_by_an_exception_its_logged_in_active_span(): void
     {
         $originalRequest = new Request('GET', '/foo-uri');
         $injectedRequest = $originalRequest;
@@ -82,19 +87,19 @@ class OpentracingPluginTest extends TestCase
 
         $subject = new OpentracingPlugin($this->requestSpanning->reveal(), $this->tracing->reveal());
 
-        $next = function (RequestInterface $request) use($injectedRequest, $exceptionToBeThrown) {
+        $next = function (RequestInterface $request) use ($injectedRequest, $exceptionToBeThrown) {
             $this->assertSame($request, $injectedRequest);
             return new HttpRejectedPromise($exceptionToBeThrown);
         };
 
         $this->expectException(TransferException::class);
-        $promise = $subject->handleRequest($originalRequest, $next, static function() {});
+        $promise = $subject->handleRequest($originalRequest, $next, static function () {});
 
         /** @var ResponseInterface $response */
         $promise->wait();
     }
 
-    public function test_when_promise_is_rejected_by_HttplugException_requestSpanning_is_finished_with_the_status_code_of_the_response(): void
+    public function test_when_promise_is_rejected_by_exception_that_contains_response_requestSpanning_is_finished_with_the_status_code_of_the_response(): void
     {
         $originalRequest = new Request('GET', '/foo-uri');
         $injectedRequest = $originalRequest;
@@ -119,13 +124,14 @@ class OpentracingPluginTest extends TestCase
 
         $subject = new OpentracingPlugin($this->requestSpanning->reveal(), $this->tracing->reveal());
 
-        $next = function (RequestInterface $request) use($injectedRequest, $exceptionToBeThrown) {
+        $next = function (RequestInterface $request) use ($injectedRequest, $exceptionToBeThrown) {
             $this->assertSame($request, $injectedRequest);
             return new HttpRejectedPromise($exceptionToBeThrown);
         };
 
         $this->expectException(TransferException::class);
-        $promise = $subject->handleRequest($originalRequest, $next, static function() {});
+        $promise = $subject->handleRequest($originalRequest, $next, static function () {
+        });
 
         /** @var ResponseInterface $response */
         $promise->wait();

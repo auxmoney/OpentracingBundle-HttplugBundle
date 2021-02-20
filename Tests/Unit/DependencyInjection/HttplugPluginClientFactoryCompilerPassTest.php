@@ -4,11 +4,15 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle\Tests\Unit\DependencyInjection;
 
-use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginClientFactoryCompilerPass;
-use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use PHPUnit\Framework\TestCase;
+use Http\Client\Common\PluginClient;
+use Http\Client\Common\PluginClientFactory;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Auxmoney\OpentracingHttplugBundle\Factory\DecoratedPluginClientFactory;
+use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginClientFactoryCompilerPass;
 
 class HttplugPluginClientFactoryCompilerPassTest extends TestCase
 {
@@ -22,26 +26,51 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
         $this->subject = new HttplugPluginClientFactoryCompilerPass();
     }
 
-    public function testProcessNoClientDefinitions(): void
+    public function testProcessDoesNothingWhenFactoryOfPluginClientIsNotPluginClientFactory(): void
     {
-        $noClientDefinition = $this->prophesize(Definition::class);
-        $noClientDefinition->getClass()->willReturn(Definition::class);
-        $container = new ContainerBuilder();
-        $container->addDefinitions(['noclient' => $noClientDefinition->reveal()]);
+        $clientDefinition = $this->prophesize(Definition::class);
+        $clientDefinition->getClass()->willReturn(PluginClient::class);
 
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
+        $clientFactory = $this->prophesize(Reference::class);
+        $clientFactory->__toString()->willReturn(Reference::class); // here!
+
+        $clientDefinition->getFactory()->willReturn([
+            $clientFactory->reveal(),
+            'factoryMethodOfPluginClientFactory'
+        ]);
+
+        $clientDefinition->setFactory(Argument::any())->shouldNotBeCalled();
+        
+        $container = new ContainerBuilder();
+        $container->addDefinitions([
+            'client' => $clientDefinition->reveal()
+        ]);
 
         $this->subject->process($container);
     }
 
-    public function testSomething(): void
+    public function testProcessDecoratesPluginClientFactory(): void
     {
-        $noClientDefinition = $this->prophesize(Definition::class);
-        $noClientDefinition->getClass()->willReturn(Definition::class);
-        $container = new ContainerBuilder();
-        $container->addDefinitions(['noclient' => $noClientDefinition->reveal()]);
+        $clientDefinition = $this->prophesize(Definition::class);
+        $clientDefinition->getClass()->willReturn(PluginClient::class);
+        
+        $clientFactory = $this->prophesize(Reference::class);
+        $clientFactory->__toString()->willReturn(PluginClientFactory::class);
+        
+        $clientDefinition->getFactory()->willReturn([
+            $clientFactory->reveal(),
+            'factoryMethodOfPluginClientFactory'
+        ]);
 
-        $noClientDefinition->setArguments(Argument::any())->shouldNotBeCalled();
+        $clientDefinition->setFactory(Argument::exact([
+            new Reference(DecoratedPluginClientFactory::class),
+            'createClient'
+        ]))->shouldBeCalled();
+        
+        $container = new ContainerBuilder();
+        $container->addDefinitions([
+            'client' => $clientDefinition->reveal()
+        ]);
 
         $this->subject->process($container);
     }
