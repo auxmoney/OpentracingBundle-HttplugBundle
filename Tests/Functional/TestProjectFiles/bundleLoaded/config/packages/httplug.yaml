@@ -3,7 +3,7 @@ httplug:
       client: 'auto'
 
   clients:
-    hello:
+    main:
       factory: 'httplug.factory.curl'
       http_methods_client: true
       plugins:
