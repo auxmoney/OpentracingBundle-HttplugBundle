@@ -47,7 +47,7 @@ If you are not using it, you need to manually enable the bundle:
 
 ## Configuration
 
-No configuration is necessary, the provided compiler pass will decorate `PluginClientFactory` in order to add the `OpentracingPlugin` (where headers injection happens) to Httplug's clients.
+No configuration is necessary, the provided compiler pass will decorate `PluginClientFactory` in order to add the `OpentracingPlugin` (where headers injection happens) to all existing Httplug clients.
 
 ## Usage
 
