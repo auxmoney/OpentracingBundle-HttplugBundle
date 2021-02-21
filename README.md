@@ -19,9 +19,7 @@ This bundle is only an additional plugin and should not be installed independent
 
 ### Require dependencies
 
-After you have installed the OpentracingBundle:
-
-* require the dependencies:
+After you have installed the OpentracingBundle and HttplugBundle:
 
 ```bash
     composer req auxmoney/opentracing-bundle-php-http-httplug-bundle
@@ -32,8 +30,6 @@ After you have installed the OpentracingBundle:
 If you are using [Symfony Flex](https://github.com/symfony/flex), you are all set!
 
 If you are not using it, you need to manually enable the bundle:
-
-* add bundle to your application:
 
 ```php
     # Symfony 3: AppKernel.php
@@ -47,7 +43,7 @@ If you are not using it, you need to manually enable the bundle:
 
 ## Configuration
 
-No configuration is necessary, the provided compiler pass will decorate `PluginClientFactory` in order to add the `OpentracingPlugin` (where headers injection happens) to all existing Httplug clients.
+No configuration is necessary, the provided compiler pass will decorate `PluginClientFactory` in order to add the `OpentracingPlugin` (where tracing headers injection happens) to all existing Httplug clients.
 
 ## Usage
 
