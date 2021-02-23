@@ -18,8 +18,7 @@ class FunctionalTest extends JaegerWebFunctionalTest
 
         $p = new Process(['symfony', 'console', 'test:httplug'], self::BUILD_TESTPROJECT);
         $p->mustRun();
-        $output = $p->getOutput();
-        $traceId = substr($output, 0, strpos($output, ':'));
+        $traceId = trim($p->getOutput());
         self::assertNotEmpty($traceId);
 
         $spans = $this->getSpansFromTrace($this->getTraceFromJaegerAPI($traceId));
