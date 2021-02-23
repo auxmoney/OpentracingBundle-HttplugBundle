@@ -3,8 +3,3 @@ composer.lock
 .phpunit.result.cache
 /build/
 /vendor/
-/.idea/
-/.devcontainer
-/.vscode
-/*.code-workspace
-/init_env.sh
