@@ -17,9 +17,9 @@ class HttplugPluginClientFactoryCompilerPass implements CompilerPassInterface
     {
         foreach ($container->getDefinitions() as $definition) {
             if ($definition->getClass() === PluginClient::class) {
-                $callable = $definition->getFactory();
+                $factory = $definition->getFactory();
 
-                if ($callable[0] instanceof Reference && (string)$callable[0] === PluginClientFactory::class) {
+                if (is_array($factory) && $factory[0] instanceof Reference && (string)$factory[0] === PluginClientFactory::class) {
                     $definition->setFactory([
                         new Reference(DecoratedPluginClientFactory::class),
                         'createClient'

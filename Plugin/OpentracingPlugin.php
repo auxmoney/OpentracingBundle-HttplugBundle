@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle\Plugin;
 
-use Auxmoney\OpentracingBundle\Internal\Constant;
-use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
-use Auxmoney\OpentracingBundle\Service\Tracing;
-use Http\Client\Common\Plugin;
-use Http\Client\Exception\HttpException;
+use Exception;
 use Http\Promise\Promise;
+use Http\Client\Common\Plugin;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Throwable;
+use Http\Client\Exception\HttpException;
+use Auxmoney\OpentracingBundle\Service\Tracing;
+use Auxmoney\OpentracingBundle\Internal\Constant;
+use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 
 final class OpentracingPlugin implements Plugin
 {
@@ -28,6 +28,7 @@ final class OpentracingPlugin implements Plugin
     /**
      * @inheritDoc
      * @SuppressWarnings(PHPMD.UnusedFunctionParametersCheck)
+     * @throws Exception
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
@@ -39,7 +40,7 @@ final class OpentracingPlugin implements Plugin
         return $next($request)->then(function (ResponseInterface $response) {
             $this->onFulfilled($response);
             return $response;
-        }, function (Throwable $exception) {
+        }, function (Exception $exception) {
             $this->onRejected($exception);
             throw $exception;
         });
@@ -51,7 +52,7 @@ final class OpentracingPlugin implements Plugin
         $this->tracing->finishActiveSpan();
     }
 
-    private function onRejected(Throwable $exception): void
+    private function onRejected(Exception $exception): void
     {
         $this->tracing->logInActiveSpan([
             'event' => 'error',
