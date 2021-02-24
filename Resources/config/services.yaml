@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Auxmoney\OpentracingHttplugBundle\Plugin\OpentracingPlugin: ~
+
+    Auxmoney\OpentracingHttplugBundle\Factory\DecoratedPluginClientFactory:
+        arguments:
+            - '@Http\Client\Common\PluginClientFactory'

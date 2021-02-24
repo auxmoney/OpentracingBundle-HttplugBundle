@@ -1,0 +1,8 @@
+operationName: 'test:httplug'
+tags:
+  -
+    key: auxmoney-opentracing-bundle.span-origin
+    value: 'core:command'
+  -
+    key: command.exit-code
+    value: 0
