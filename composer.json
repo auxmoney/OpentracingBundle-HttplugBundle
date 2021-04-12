@@ -16,23 +16,23 @@
   "type": "symfony-bundle",
   "license": "MIT",
   "require": {
-    "php": "^7.2.33",
+    "php": "^7.3.27",
     "opentracing/opentracing": "1.0.0-beta5@beta",
-    "auxmoney/opentracing-bundle-core": "^v0.7.2",
-    "php-http/httplug-bundle": "^1.19"
+    "auxmoney/opentracing-bundle-core": "^v0.8",
+    "php-http/httplug-bundle": "^1.20"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
     "phpunit/phpunit": "^7.5",
     "phpstan/phpstan": "^0.12",
-    "squizlabs/php_codesniffer": "^3.5",
-    "phpmd/phpmd": "^2.7",
-    "php-coveralls/php-coveralls": "^2.2",
+    "squizlabs/php_codesniffer": "^3.6",
+    "phpmd/phpmd": "^2.9",
+    "php-coveralls/php-coveralls": "^2.4",
     "symfony/filesystem": "*",
     "symfony/process": "*",
     "symfony/yaml": "*",
-    "mtdowling/jmespath.php": "^2.5",
-    "nyholm/psr7": "^1.3",
+    "mtdowling/jmespath.php": "^2.6",
+    "nyholm/psr7": "^1.4",
     "php-http/curl-client": "^2.2"
   },
   "autoload": {

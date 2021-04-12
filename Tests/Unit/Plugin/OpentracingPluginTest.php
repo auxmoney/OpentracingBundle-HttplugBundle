@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle\Tests\Unit\Plugin;
 
+use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
+use Auxmoney\OpentracingBundle\Service\Tracing;
+use Auxmoney\OpentracingHttplugBundle\Plugin\OpentracingPlugin;
+use Http\Client\Exception\HttpException;
+use Http\Client\Exception\TransferException;
+use Http\Client\Promise\HttpFulfilledPromise;
+use Http\Client\Promise\HttpRejectedPromise;
 use Nyholm\Psr7\Request;
 use Nyholm\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Http\Client\Exception\HttpException;
-use Http\Client\Exception\TransferException;
-use Http\Client\Promise\HttpRejectedPromise;
-use Http\Client\Promise\HttpFulfilledPromise;
-use Auxmoney\OpentracingBundle\Service\Tracing;
-use Auxmoney\OpentracingHttplugBundle\Plugin\OpentracingPlugin;
-use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 
 class OpentracingPluginTest extends TestCase
 {
@@ -26,7 +26,7 @@ class OpentracingPluginTest extends TestCase
     /** @var Tracing|ObjectProphecy */
     private $tracing;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->requestSpanning = $this->prophesize(RequestSpanning::class);
@@ -50,7 +50,7 @@ class OpentracingPluginTest extends TestCase
         $subject = new OpentracingPlugin($this->requestSpanning->reveal(), $this->tracing->reveal());
 
         $next = function (RequestInterface $request) use ($injectedRequest) {
-            $this->assertSame($request, $injectedRequest);
+            self::assertSame($request, $injectedRequest);
             return new HttpFulfilledPromise(new Response(201, [], 'some body'));
         };
 
@@ -88,7 +88,7 @@ class OpentracingPluginTest extends TestCase
         $subject = new OpentracingPlugin($this->requestSpanning->reveal(), $this->tracing->reveal());
 
         $next = function (RequestInterface $request) use ($injectedRequest, $exceptionToBeThrown) {
-            $this->assertSame($request, $injectedRequest);
+            self::assertSame($request, $injectedRequest);
             return new HttpRejectedPromise($exceptionToBeThrown);
         };
 
@@ -125,7 +125,7 @@ class OpentracingPluginTest extends TestCase
         $subject = new OpentracingPlugin($this->requestSpanning->reveal(), $this->tracing->reveal());
 
         $next = function (RequestInterface $request) use ($injectedRequest, $exceptionToBeThrown) {
-            $this->assertSame($request, $injectedRequest);
+            self::assertSame($request, $injectedRequest);
             return new HttpRejectedPromise($exceptionToBeThrown);
         };
 
