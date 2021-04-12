@@ -4,31 +4,29 @@ declare(strict_types=1);
 
 namespace Auxmoney\OpentracingHttplugBundle\Tests\Unit\DependencyInjection;
 
-use Prophecy\Argument;
-use PHPUnit\Framework\TestCase;
+use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginClientFactoryCompilerPass;
+use Auxmoney\OpentracingHttplugBundle\Factory\DecoratedPluginClientFactory;
 use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Definition;
+use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Auxmoney\OpentracingHttplugBundle\Factory\DecoratedPluginClientFactory;
-use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginClientFactoryCompilerPass;
-use Prophecy\Doubler\Generator\Node\ArgumentNode;
-use Prophecy\Prophecy\ObjectProphecy;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 class HttplugPluginClientFactoryCompilerPassTest extends TestCase
 {
     /** @var HttplugPluginClientFactoryCompilerPass */
     private $subject;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->subject = new HttplugPluginClientFactoryCompilerPass();
     }
-    
-    public function dataOfNonDesiredFactories()
+
+    public function dataOfNonDesiredFactories(): array
     {
         $factoryReferenceOkButWrongServiceId = $this->prophesize(Reference::class);
         $factoryReferenceOkButWrongServiceId->__toString()->willReturn('wrongServiceId'); // here!
@@ -50,7 +48,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
             ]
         ];
     }
-    
+
     /**
      * @param string|array|null $factory
      * @dataProvider dataOfNonDesiredFactories
@@ -62,7 +60,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
 
         $clientDefinition->getFactory()->willReturn($factory);
         $clientDefinition->setFactory(Argument::any())->shouldNotBeCalled();
-        
+
         $container = new ContainerBuilder();
         $container->addDefinitions([
             'client' => $clientDefinition->reveal()
@@ -85,7 +83,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
         ]);
 
         $clientDefinition->setFactory(Argument::any())->shouldNotBeCalled();
-        
+
         $container = new ContainerBuilder();
         $container->addDefinitions([
             'client' => $clientDefinition->reveal()
@@ -98,10 +96,10 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
     {
         $clientDefinition = $this->prophesize(Definition::class);
         $clientDefinition->getClass()->willReturn(PluginClient::class);
-        
+
         $clientFactory = $this->prophesize(Reference::class);
         $clientFactory->__toString()->willReturn(PluginClientFactory::class);
-        
+
         $clientDefinition->getFactory()->willReturn([
             $clientFactory->reveal(),
             'factoryMethodOfPluginClientFactory'
@@ -111,7 +109,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
             new Reference(DecoratedPluginClientFactory::class),
             'createClient'
         ]))->shouldBeCalled();
-        
+
         $container = new ContainerBuilder();
         $container->addDefinitions([
             'client' => $clientDefinition->reveal()

@@ -18,7 +18,7 @@ class TestController extends AbstractController
         $this->client = $client;
     }
 
-    public function index(HttpClient $client)
+    public function index(HttpClient $client): JsonResponse
     {
         $request = new Request('GET', 'https://github.com/auxmoney/OpentracingBundle-HttplugBundle');
 

@@ -19,12 +19,12 @@ class TestCommand extends Command
     public function __construct(HttpClient $client, TracingId $tracingId)
     {
         parent::__construct('test:httplug');
-        $this->setDescription('some fancy command description');    
+        $this->setDescription('some fancy command description');
         $this->client = $client;
         $this->tracingId = $tracingId;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $request = new Request('GET', '/');
 
