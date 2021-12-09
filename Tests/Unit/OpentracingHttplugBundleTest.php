@@ -7,10 +7,13 @@ namespace Auxmoney\OpentracingHttplugBundle\Tests\Unit;
 use Auxmoney\OpentracingHttplugBundle\DependencyInjection\HttplugPluginClientFactoryCompilerPass;
 use Auxmoney\OpentracingHttplugBundle\OpentracingHttplugBundle;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class OpentracingHttplugBundleTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var OpentracingHttplugBundle */
     private $subject;
 

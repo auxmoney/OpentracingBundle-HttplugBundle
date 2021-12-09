@@ -10,12 +10,15 @@ use Http\Client\Common\PluginClient;
 use Http\Client\Common\PluginClientFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class HttplugPluginClientFactoryCompilerPassTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var HttplugPluginClientFactoryCompilerPass */
     private $subject;
 

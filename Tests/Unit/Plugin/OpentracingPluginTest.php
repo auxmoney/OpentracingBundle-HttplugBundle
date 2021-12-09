@@ -14,12 +14,15 @@ use Http\Client\Promise\HttpRejectedPromise;
 use Nyholm\Psr7\Request;
 use Nyholm\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class OpentracingPluginTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var RequestSpanning|ObjectProphecy */
     private $requestSpanning;
 
