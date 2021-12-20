@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.0.0...v1.1.0) (2021-12-20)
+
+
+### Features
+
+* support PHP 8 ([#5](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/issues/5)) ([7a74fbf](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/commit/7a74fbfe0e4b720a5c83e10ac09042cf8956646b))
+
 # [1.0.0](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v0.1.1...v1.0.0) (2021-11-17)
 
 
