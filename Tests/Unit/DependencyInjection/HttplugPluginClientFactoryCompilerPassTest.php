@@ -110,7 +110,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
         $clientDefinition->setFactory(Argument::exact([
             new Reference(DecoratedPluginClientFactory::class),
             'createClient'
-        ]))->shouldBeCalled();
+        ]))->shouldBeCalled()->willReturn($clientDefinition->reveal());
 
         $container = new ContainerBuilder();
         $container->addDefinitions([
