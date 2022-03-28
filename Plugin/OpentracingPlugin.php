@@ -16,8 +16,8 @@ use Auxmoney\OpentracingBundle\Internal\Decorator\RequestSpanning;
 
 final class OpentracingPlugin implements Plugin
 {
-    private $requestSpanning;
-    private $tracing;
+    private RequestSpanning $requestSpanning;
+    private Tracing $tracing;
 
     public function __construct(RequestSpanning $requestSpanning, Tracing $tracing)
     {

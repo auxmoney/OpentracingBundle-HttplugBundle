@@ -19,8 +19,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var HttplugPluginClientFactoryCompilerPass */
-    private $subject;
+    private HttplugPluginClientFactoryCompilerPass $subject;
 
     public function setUp(): void
     {
@@ -111,7 +110,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
         $clientDefinition->setFactory(Argument::exact([
             new Reference(DecoratedPluginClientFactory::class),
             'createClient'
-        ]))->shouldBeCalled();
+        ]))->shouldBeCalled()->willReturn($clientDefinition->reveal());
 
         $container = new ContainerBuilder();
         $container->addDefinitions([

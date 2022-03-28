@@ -11,8 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class OpentracingHttplugExtensionTest extends TestCase
 {
-    /** @var OpentracingHttplugExtension */
-    private $subject;
+    private OpentracingHttplugExtension $subject;
 
     public function setUp(): void
     {
