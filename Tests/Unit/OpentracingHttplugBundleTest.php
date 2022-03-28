@@ -28,7 +28,7 @@ class OpentracingHttplugBundleTest extends TestCase
             new HttplugPluginClientFactoryCompilerPass(),
             'beforeOptimization',
             -999
-        )->shouldBeCalled();
+        )->shouldBeCalled()->willReturn($containerBuilder->reveal());
 
         $this->subject->build($containerBuilder->reveal());
     }
