@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.1.0...v1.2.0) (2022-03-28)
+
+
+### Features
+
+* support Symfony 6 ([#6](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/issues/6)) ([324e0b3](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/commit/324e0b3e92b6ff03699c964b1235f26b3108d88b))
+
 # [1.1.0](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.0.0...v1.1.0) (2021-12-20)
 
 
