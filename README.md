@@ -1,7 +1,7 @@
 # auxmoney OpentracingBundle - HttplugBundle
 
 [![test](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/workflows/test/badge.svg)](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/actions?query=workflow%3Atest)
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/auxmoney/OpentracingBundle-HttplugBundle)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/auxmoney/OpentracingBundle-HttplugBundle)](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/releases/latest)
 ![Coveralls github](https://img.shields.io/coveralls/github/auxmoney/OpentracingBundle-HttplugBundle)
 ![Codacy Badge](https://app.codacy.com/project/badge/Grade/7c97ba1b79f34f27a3a520a525d95da9)
 ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/auxmoney/OpentracingBundle-HttplugBundle)

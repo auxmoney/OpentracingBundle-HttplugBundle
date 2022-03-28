@@ -15,7 +15,7 @@ use Psr\Http\Client\ClientInterface;
 class DecoratedPluginClientFactory
 {
     private $pluginClientFactory;
-    private $plugin;
+    private OpentracingPlugin $plugin;
 
     /**
      * DevPluginClientFactory = Symfony dev.

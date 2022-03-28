@@ -19,8 +19,7 @@ class HttplugPluginClientFactoryCompilerPassTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var HttplugPluginClientFactoryCompilerPass */
-    private $subject;
+    private HttplugPluginClientFactoryCompilerPass $subject;
 
     public function setUp(): void
     {
