@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.2.0...v1.2.1) (2022-07-24)
+
+
+### Bug Fixes
+
+* symfony/flex plugin ([#7](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/issues/7)) ([59dbdc9](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/commit/59dbdc9d7f513704b3ca5353c9b75540d7dcba84))
+
 # [1.2.0](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.1.0...v1.2.0) (2022-03-28)
 
 
