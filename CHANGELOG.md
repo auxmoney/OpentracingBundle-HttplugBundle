@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.2.1...v1.2.2) (2022-08-23)
+
+
+### Bug Fixes
+
+* symfony cli installation ([#8](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/issues/8)) ([8feadb8](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/commit/8feadb86b648291bea62a4938b8b7b0cb2dcc72f))
+
 ## [1.2.1](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.2.0...v1.2.1) (2022-07-24)
 
 
