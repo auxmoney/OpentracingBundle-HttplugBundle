@@ -1,4 +1,5 @@
 /.php-version
 .phpunit.result.cache
+/.idea/
 /build/
 /vendor/
