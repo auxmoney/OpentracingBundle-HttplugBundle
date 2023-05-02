@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.2.2...v1.2.3) (2023-05-02)
+
+
+### Bug Fixes
+
+* update supported PHP and Symfony versions + fix composer behavio… ([#9](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/issues/9)) ([1aa91c5](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/commit/1aa91c50f7e6e5deb1d7afac5a78f1260c20c322))
+
 ## [1.2.2](https://github.com/auxmoney/OpentracingBundle-HttplugBundle/compare/v1.2.1...v1.2.2) (2022-08-23)
 
 
